@@ -1,195 +1,139 @@
-# LibraryOS - Modern Library Management System
+# Library Management System
 
-A sleek, modern web-based library management system built with PHP and featuring a responsive dark-themed interface. LibraryOS provides comprehensive tools for managing books, magazines, members, and borrowing transactions with an intuitive dashboard.
+A comprehensive web-based library management system built with PHP and MySQL. This system allows librarians to manage books, members, and borrowing transactions efficiently.
 
 ## Features
 
-### 📚 **Book Management**
+- **Book Management**
 
-- Add new books with ISBN, author, title, and copy tracking
-- Real-time inventory management
-- Track available copies and borrowing status
-- Comprehensive book listing with search capabilities
+  - Add, edit, and delete books
+  - Search books by title, author, or ISBN
+  - Track book availability and status
+  - Categorize books by genre
 
-### 📰 **Magazine Management**
+- **Member Management**
 
-- Add magazines with issue numbers and publisher information
-- Track magazine inventory and availability
-- Separate management system for periodicals
+  - Register new library members
+  - Update member information
+  - Track member borrowing history
+  - Manage member status (active/inactive)
 
-### 👥 **Member Management**
+- **Borrowing System**
 
-- Register new library members with unique IDs
-- Track member information (name, email, member ID)
-- Monitor borrowing history and current borrowed items
-- Member activity tracking
+  - Issue books to members
+  - Return book processing
+  - Track due dates and overdue books
+  - Generate borrowing reports
 
-### 🔄 **Borrowing System**
+- **Administrative Features**
+  - User authentication and authorization
+  - Dashboard with system statistics
+  - Generate various reports
+  - System settings and configuration
 
-- Issue books and magazines to registered members
-- Automated due date calculation (14-day borrowing period)
-- Return processing with status updates
-- Overdue item tracking and notifications
+## Requirements
 
-### 📊 **Dashboard & Reports**
-
-- Real-time statistics dashboard
-- Visual cards showing total books, magazines, members, and borrowed items
-- Recent activity feed
-- Comprehensive borrowing reports with due dates and overdue status
-- Member borrowing history
-
-### 🎨 **Modern UI Features**
-
-- Dark-themed responsive interface
-- Mobile-friendly design with collapsible sidebar
-- Smooth animations and transitions
-- Font Awesome icons throughout
-- Grid-based layout system
-
-## Technical Requirements
-
-- **Web Server**: Apache (via XAMPP recommended)
+- **Web Server**: Apache (via XAMPP)
 - **PHP**: Version 7.4 or higher
+- **Database**: MySQL 5.7 or higher
 - **Browser**: Modern web browser (Chrome, Firefox, Safari, Edge)
-- **Dependencies**: Font Awesome 6.0+ (loaded via CDN)
 
 ## Installation
 
-### Quick Setup with XAMPP
+1. **Download and Install XAMPP**
 
-1. **Install XAMPP**
+   - Download XAMPP from [https://www.apachefriends.org/](https://www.apachefriends.org/)
+   - Install and start Apache and MySQL services
 
-   ```bash
-   # Download from https://www.apachefriends.org/
-   # Install and start Apache service
-   ```
-
-2. **Deploy LibraryOS**
+2. **Clone or Download the Project**
 
    ```bash
-   # Clone or download the project
-   git clone [repository-url] c:\xampp\htdocs\Librarysystem
-
-   # Or extract ZIP file to:
-   c:\xampp\htdocs\Librarysystem\
+   git clone https://github.com/yourusername/library-system.git
+   # OR download and extract the ZIP file
    ```
 
-3. **Start Services**
+3. **Move Files to XAMPP Directory**
 
-   - Open XAMPP Control Panel
-   - Start Apache service
-   - (MySQL not required - uses session-based storage)
+   - Copy the project folder to `c:\xampp\htdocs\Librarysystem`
 
-4. **Access Application**
+4. **Database Setup**
+
+   - Open phpMyAdmin: `http://localhost/phpmyadmin`
+   - Create a new database named `library_system`
+   - Import the SQL file: `database/library_system.sql`
+
+5. **Configure Database Connection**
+
+   - Edit `config/database.php` with your database credentials:
+
+   ```php
+   $host = 'localhost';
+   $username = 'root';
+   $password = '';
+   $database = 'library_system';
    ```
-   http://localhost/Librarysystem
-   ```
+
+6. **Access the Application**
+   - Open your browser and go to: `http://localhost/Librarysystem`
+
+## Default Login Credentials
+
+- **Admin Username**: admin
+- **Admin Password**: admin123
+
+_Please change these credentials after first login for security._
 
 ## Project Structure
 
 ```
 Librarysystem/
-├── classes/
-│   ├── Library.php          # Main library management class
-│   ├── Book.php            # Book entity class
-│   ├── Magazine.php        # Magazine entity class
-│   └── Member.php          # Member entity class
-├── index.php               # Main application file
-├── readme.md              # This file
-└── [additional assets]
+├── config/
+│   └── database.php
+├── includes/
+│   ├── header.php
+│   ├── footer.php
+│   └── functions.php
+├── css/
+│   └── style.css
+├── js/
+│   └── script.js
+├── images/
+├── admin/
+│   ├── dashboard.php
+│   ├── books.php
+│   ├── members.php
+│   └── reports.php
+├── database/
+│   └── library_system.sql
+├── index.php
+├── login.php
+└── readme.md
 ```
 
-## Class Architecture
+## Usage
 
-### Library Class
+1. **Login**: Access the admin panel using the default credentials
+2. **Add Books**: Navigate to Books section to add new books to the library
+3. **Register Members**: Use the Members section to register new library members
+4. **Issue Books**: Use the borrowing system to issue books to members
+5. **Return Books**: Process book returns and update availability
+6. **Generate Reports**: Access various reports for library statistics
 
-- **Book Management**: `addBook()`, `getAllBooks()`
-- **Magazine Management**: `addMagazine()`, `getAllMagazines()`
-- **Member Management**: `registerMember()`, `getAllMembers()`
-- **Borrowing System**: `borrowItem()`, `returnItem()`
-- **Reporting**: `getBorrowedItemsReport()`
+## Contributing
 
-### Entity Classes
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/new-feature`)
+3. Commit your changes (`git commit -am 'Add new feature'`)
+4. Push to the branch (`git push origin feature/new-feature`)
+5. Create a Pull Request
 
-- **Book**: ISBN, title, author, issue number, available copies
-- **Magazine**: Title, publisher, issue number, available copies
-- **Member**: Member ID, name, email, borrowed items tracking
+### Version 1.0.0
 
-## Default Sample Data
+- Initial release
+- Basic book and member management
+- Borrowing system implementation
+- Admin dashboard
 
-LibraryOS comes with sample data for demonstration:
+---
 
-**Books:**
-
-- The Great Gatsby by F. Scott Fitzgerald
-- To Kill a Mockingbird by Harper Lee
-- The Catcher in the Rye by J.D. Salinger
-
-**Magazines:**
-
-- National Geographic (Issue 202)
-- Time Magazine (Issue 45)
-- Forbes (Issue 88)
-
-**Members:**
-
-- John Doe (M001)
-- Jane Smith (M002)
-- Robert Johnson (M003)
-
-## Usage Guide
-
-### 1. Dashboard
-
-- View real-time statistics
-- Monitor recent borrowing activity
-- Check system overview
-
-### 2. Adding Books
-
-- Navigate to "Books" section
-- Fill in book details (title, author, ISBN, copies)
-- Submit form to add to inventory
-
-### 3. Adding Magazines
-
-- Go to "Magazines" section
-- Enter magazine information
-- Specify issue number and available copies
-
-### 4. Member Registration
-
-- Access "Members" section
-- Provide member ID, name, and email
-- Register new library members
-
-### 5. Borrowing Items
-
-- Use "Borrow" section
-- Select item type (book/magazine)
-- Enter item ID and member ID
-- System automatically sets 14-day due date
-
-### 6. Returning Items
-
-- Navigate to "Return" section
-- Specify item type and IDs
-- Process return and update availability
-
-### 7. Reports
-
-- View "Reports" section for comprehensive borrowing data
-- Monitor overdue items
-- Track member activity
-
-## Mobile Responsiveness
-
-LibraryOS features a fully responsive design:
-
-- Collapsible sidebar navigation on mobile
-- Touch-friendly interface elements
-- Optimized layouts for tablets and phones
-- Responsive data tables with horizontal scrolling
-
-**LibraryOS v1.0** - A modern approach to library management
+**Note**: This is a local development setup. For production deployment, ensure proper security measures are implemented including SSL certificates, secure database credentials, and regular backups.
