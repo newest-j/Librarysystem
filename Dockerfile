@@ -2,14 +2,14 @@
 FROM php:8.2-apache
 
 # Set working directory
-WORKDIR /opt/render/project
+WORKDIR /var/www/html
 
 # Copy all application files
-COPY . /opt/render/project/
+COPY . /var/www/html/
 
 # Set proper permissions
-RUN chown -R www-data:www-data /opt/render/project && \
-    chmod -R 755 /opt/render/project
+RUN chown -R www-data:www-data /var/www/html && \
+    chmod -R 755 /var/www/html
 
 # Enable Apache mod_rewrite (if needed)
 RUN a2enmod rewrite
