@@ -1,8 +1,14 @@
 <?php
-require_once 'classes/Library.php';
+require_once 'Entities/Library.php';
+
+use Librarysystem\Entities\Library as EntityLibrary;
+
+use Librarysystem\Entities\Book as EntityBook;
+use Librarysystem\Entities\Magazine as EntityMagazine;
+use Librarysystem\Entities\Member as EntityMember;
 
 // Initialize library
-$library = new Library();
+$library = new EntityLibrary();
 $message = '';
 $messageType = '';
 
@@ -20,7 +26,7 @@ if ($_POST) {
     try {
         switch ($_POST['action']) {
             case 'add_book':
-                $book = new Book($_POST['title'], $_POST['author'], $_POST['issue_number'], $_POST['available_copies'], $_POST['isbn']);
+                $book = new EntityBook($_POST['title'], $_POST['author'], $_POST['issue_number'], $_POST['available_copies'], $_POST['isbn']);
                 if ($library->addBook($book)) {
                     $message = "Book added successfully!";
                     $messageType = 'success';
@@ -31,7 +37,7 @@ if ($_POST) {
                 break;
                 
             case 'add_magazine':
-                $magazine = new Magazine($_POST['title'], $_POST['author'], $_POST['issue_number'], $_POST['available_copies']);
+                $magazine = new EntityMagazine($_POST['title'], $_POST['author'], $_POST['issue_number'], $_POST['available_copies']);
                 if ($library->addMagazine($magazine)) {
                     $message = "Magazine added successfully!";
                     $messageType = 'success';
@@ -42,7 +48,7 @@ if ($_POST) {
                 break;
                 
             case 'register_member':
-                $member = new Member($_POST['member_id'], $_POST['name'], $_POST['email']);
+                $member = new EntityMember($_POST['member_id'], $_POST['name'], $_POST['email']);
                 if ($library->registerMember($member)) {
                     $message = "Member registered successfully!";
                     $messageType = 'success';
@@ -74,19 +80,19 @@ if ($_POST) {
 if (empty($library->getAllBooks()) && empty($library->getAllMagazines()) && empty($library->getAllMembers())) {
     try {
         //simple book
-       $library->addBook(new Book("The Great Gatsby", "F. Scott Fitzgerald", 1, 3, "978-0-7432-7356-5"));
-       $library->addBook(new Book("To Kill a Mockingbird", "Harper Lee", 1, 2, "978-0-06-112008-4"));
-       $library->addBook(new Book("The Catcher in the Rye", "J.D. Salinger", 1, 4, "978-0-316-76948-0"));
+       $library->addBook(new EntityBook("The Great Gatsby", "F. Scott Fitzgerald", 1, 3, "978-0-7432-7356-5"));
+       $library->addBook(new EntityBook("To Kill a Mockingbird", "Harper Lee", 1, 2, "978-0-06-112008-4"));
+       $library->addBook(new EntityBook("The Catcher in the Rye", "J.D. Salinger", 1, 4, "978-0-316-76948-0"));
        
        // Sample magazines
-       $library->addMagazine(new Magazine("National Geographic", "Various", 202, 5));
-       $library->addMagazine(new Magazine("Time", "Various", 45, 3));
-       $library->addMagazine(new Magazine("Forbes", "Various", 88, 2));
+       $library->addMagazine(new EntityMagazine("National Geographic", "Various", 202, 5));
+       $library->addMagazine(new EntityMagazine("Time", "Various", 45, 3));
+       $library->addMagazine(new EntityMagazine("Forbes", "Various", 88, 2));
 
        // Sample members
-       $library->registerMember(new Member("M001", "John Doe", "john@example.com"));
-       $library->registerMember(new Member("M002", "Jane Smith", "jane@example.com"));
-       $library->registerMember(new Member("M003", "Robert Johnson", "robert@example.com"));
+       $library->registerMember(new EntityMember("M001", "John Doe", "john@example.com"));
+       $library->registerMember(new EntityMember("M002", "Jane Smith", "jane@example.com"));
+       $library->registerMember(new EntityMember("M003", "Robert Johnson", "robert@example.com"));
     } catch (Exception $e) {
         // Ignore errors for sample data
     }

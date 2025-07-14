@@ -1,4 +1,9 @@
 <?php
+
+
+namespace Librarysystem\Entities;
+
+
 abstract class LibraryItem {
     public $title;
     public $author;

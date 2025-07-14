@@ -1,6 +1,14 @@
 <?php
+
+namespace Librarysystem\Entities;
+
 require_once 'LibraryItem.php';
-require_once './interface/Borrowable.php';
+require_once './Actions/Borrowable.php';
+
+
+use Librarysystem\Actions\Borrowable;
+
+
 
 class Book extends LibraryItem implements Borrowable {
     public $isbn;
@@ -8,11 +16,11 @@ class Book extends LibraryItem implements Borrowable {
     public function __construct($title, $author, $issueNumber, $availableCopies, $isbn) {
         // Input validation
         if (empty($title) || empty($author) || empty($isbn)) {
-            throw new InvalidArgumentException("Title, author, and ISBN are required");
+            throw new \InvalidArgumentException("Title, author, and ISBN are required");
         }
         
         if ($availableCopies < 0) {
-            throw new InvalidArgumentException("Available copies cannot be negative");
+            throw new \InvalidArgumentException("Available copies cannot be negative");
         }
 
         parent::__construct($title, $author, $issueNumber, $availableCopies);

@@ -1,5 +1,7 @@
 <?php
 
+namespace Librarysystem\Entities;
+
 require_once 'Book.php';
 require_once 'Magazine.php';
 require_once 'Member.php';
@@ -10,6 +12,21 @@ class Library{
     private $magazines = [];
     private $members = [];
     private $borrowings = [];
+    
+
+   public static function booksTotal(array $books){
+    return count($books);
+   }
+
+  public static function magazineTotal(array $magazines){
+    return count($magazines);
+   }
+
+
+   public static function getTotalItems(array $books, array $magazines){
+    return count($books) + count($magazines);
+  }
+
 
 
   public function addBook(Book $book) {
